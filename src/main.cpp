@@ -29,15 +29,17 @@ std::string hasData(std::string s) {
   return "";
 }
 
-int main()
+int main(int argc, char *argv[])// used to be ()...walkthrough 33:49
 {
   uWS::Hub h;
 
   PID pid;
   // TODO: Initialize the pid variable. (17m walkthrough video)
-  double init_Kp = 0;
-  double init_Ki = 0;
-  double init_Kd = 0;
+  // 'atof' string to float. argv[0] is the name of executable 'pid' (inside build folder)
+  // to run executable: ./pid -0.5 1 -0.5
+  double init_Kp = atof(argv[1]);//-0.05;
+  double init_Ki = atof(argv[2]);//-0.001;
+  double init_Kd = atof(argv[3]);//-1.0;
   pid.Init(init_Kp, init_Ki, init_Kd);
 
   h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
@@ -62,11 +64,10 @@ int main()
           * NOTE: Feel free to play around with the throttle and speed. Maybe use
           * another PID controller to control the speed!
           */
-
-          steer_value = 0;
+          pid.UpdateError(cte);
+          steer_value = pid.TotalError();//Kp*p_error + Ki*i_error + Kd*d_error;
           
 
-          
           // DEBUG
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
 
