@@ -34,10 +34,10 @@ The gain, or "strength", of each of the three components described above need to
 The final gains selected were: 
 
  - Kp = 0.4
- - Kd = 6.0
- - Ki = 0.001
+ - Kd = 5.0
+ - Ki = 0.00001
 
- The gains allow the car to travel around the track fairly well.  However, better results could probably be achieved using a tuning algorithm such as the "Twiddle" algorithm covered in the lessons.  
+ The gains allow the car to travel around the track relatively well.  However, better results could probably be achieved using a tuning algorithm such as the "Twiddle" algorithm covered in the lessons.  
 
 
 ---
