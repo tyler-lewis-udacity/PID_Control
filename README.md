@@ -1,5 +1,45 @@
-# CarND-Controls-PID
+# P.I.D. Control
 Self-Driving Car Engineer Nanodegree Program
+
+---
+
+## Project Description
+The goal of this project was to implement a PID controller in C++ 
+capable of maneuvering a vehicle around a track.  The simulator used 
+for this project was provided by Udacity.  Cross track error (CTE) and vehicle speed data are sent from the simulator to the PID controller.  The data is then used to calculate the required vehicle steering angle.
+
+
+## Reflection
+
+ - Describe the effect each of the P, I, D components had in your implementation:
+
+##### Proportional (P) Component
+The proportional component of the controller adjusts the steering angle in direct proportion to the cross track error.  For example, if the car is slightly too far the left of the desired path, the steering angle will be turned slightly to the right to correct this error.  If the car is very far to the left of the desired path, the steering angle will be turned a large amount to the right to correct for this error.  
+
+The proportional controller does better than simple "bang-bang" steering, but using a proportiona controller alone results in the car repeatedly overshooting the desired path causing constant oscillation.  
+
+##### Derivative (D) Component
+The derivative component of the controller adjusts the steering angle based on the cross track error rate (CTER).  The CTER measures how quickly the vehicle is approaching the desired path.  The derivative component counters the overshoot problem of the proportional component by attempting to minimise the CTER.  
+
+Together the proportional and derivative components form a decent controller.  However, over time a steady state error can accumulate.
+
+##### Integral (I) Component
+The integral component of the PID controller provides subtle correction to the steering angle to combat steady state error.  Over long periods of time, the steady state error slowly builds.  Neither the proportional or derivative components can counter this error, so the integral term is added to form the complete controller.
+
+
+ - Describe how the final hyperparameters were chosen:
+
+The gain, or "strength", of each of the three components described above need to be tuned in order for the controller to behave properly.  The gains for this project were tuned manually using the general procedure found [here](https://robotics.stackexchange.com/questions/167/what-are-good-strategies-for-tuning-pid-loops){:target="_blank"}.
+
+
+
+
+
+
+
+
+
+
 
 ---
 
