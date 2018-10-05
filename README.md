@@ -19,7 +19,7 @@ The proportional component of the controller adjusts the steering angle in direc
 The proportional controller does better than simple "bang-bang" steering, but using a proportiona controller alone results in the car repeatedly overshooting the desired path causing constant oscillation.  
 
 ##### Derivative (D) Component
-The derivative component of the controller adjusts the steering angle based on the cross track error rate (CTER).  The CTER measures how quickly the vehicle is approaching the desired path.  The derivative component counters the overshoot problem of the proportional component by attempting to minimise the CTER.  
+The derivative component of the controller adjusts the steering angle based on the cross track error rate (CTER).  The CTER measures how quickly the vehicle is approaching the desired path.  The derivative component counters the overshoot problem of the proportional component by attempting to minimise the CTER. If the derivative component is too low, the vehicle oscilations occur as they would in a proportional-only controller.  If the derivative component is set too high, the vehicle is not able to alter its course quicly enough and under-steers around corners.
 
 Together the proportional and derivative components form a decent controller.  However, over time a steady state error can accumulate.
 
@@ -31,14 +31,13 @@ The integral component of the PID controller provides subtle correction to the s
 
 The gain, or "strength", of each of the three components described above need to be tuned in order for the controller to behave properly.  The gains for this project were tuned manually using the general procedure found [here](https://robotics.stackexchange.com/questions/167/what-are-good-strategies-for-tuning-pid-loops){:target="_blank"}.
 
+The final gains selected were: 
 
+ - Kp = 0.4
+ - Kd = 6.0
+ - Ki = 0.001
 
-
-
-
-
-
-
+ The gains allow the car to travel around the track fairly well.  However, better results could probably be achieved using a tuning algorithm such as the "Twiddle" algorithm covered in the lessons.  
 
 
 ---
